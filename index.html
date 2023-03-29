@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" type="text/css" href="./style.css" />
+  <script src="./script.js" defer></script>
+  <title>Password Generator</title>
+</head>
+
+<body>
+  <h1>Password Generator Plus</h1>
+  <p>Instantly generate a secure, random password with zero effort</p>
+  <!-- <h1>Need more than one password?</h1>
+  <select name="" id="">
+    <option value="">2</option>
+    <option value="">3</option>
+    <option value="">4</option>
+  </select> -->
+  <div class="generated-password">
+    <input type="text" id="output" readonly>
+    <button>Regenerate Password</button>
+    <button>Copy Password</button>
+  </div>
+  <div class="password-length">
+    <button class="decrement-length">-</button>
+    <input type="range" class="password-length-range" value="16" min="1" max="100">
+    <button class="increment-length">+</button>
+  </div>
+  <div class="customize-password">
+
+    <br><input type="radio" id="random-password" name="password-type" checked><label for="random-password">Random
+      Password</label>
+    <br><input type="radio" id="passphrase" name="password-type"><label for="passphrase">Passphrase</label>
+    <br><input type="radio" id="pin" name="password-type"><label for="pin">pin</label>
+
+    <br />
+
+    <br><input type="checkbox" id="random-password-uppercase" checked><label for="random-password-uppercase">Uppercase
+      (A-Z)</label>
+    <br><input type="checkbox" id="random-password-lowercase" checked><label for="random-password-lowercase">Lowercase
+      (a-z)</label>
+    <br><input type="checkbox" id="random-password-numbers" checked><label for="random-password-numbers">Numbers
+      (0-9)</label>
+    <br><input type="checkbox" id="random-password-symbols" checked><label for="random-password-symbols">Symbols
+      (!"#$%&'()*+,-./:;<=>?@[\]^_`{|}~)</label>
+    <br />
+    <br><input type="radio" id="passphrase-mixed-case" checked name="passphrase"><label
+      for="passphrase-mixed-case">Mixed Case</label>
+    <br><input type="radio" id="passphrase-uppercase" name="passphrase"><label
+      for="passphrase-uppercase">Uppercase</label>
+    <br><input type="radio" id="passphrase-lowercase" name="passphrase"><label
+      for="passphrase-lowercase">Lowercase</label>
+    <br><input type="radio" id="passphrase-capitalize" name="passphrase"><label
+      for="passphrase-capitalize">Capitalize</label>
+
+    <br>
+
+  </div>
+
+</body>
+
+</html>

@@ -1,0 +1,14 @@
+body {
+  /* background: #000; */
+}
+
+#output {
+  /* caret-color: transparent; */
+  width: 100%;
+}
+
+.password-length{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
