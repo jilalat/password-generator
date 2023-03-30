@@ -10,56 +10,56 @@
   <title>Password Generator</title>
 </head>
 
-<body>
+<body class="very-strong">
+  <div class="container">
   <h1>Password Generator Plus</h1>
   <p>Instantly generate a secure, random password with zero effort</p>
-  <!-- <h1>Need more than one password?</h1>
-  <select name="" id="">
-    <option value="">2</option>
-    <option value="">3</option>
-    <option value="">4</option>
-  </select> -->
   <div class="generated-password">
     <input type="text" id="output" readonly>
-    <button>Regenerate Password</button>
-    <button>Copy Password</button>
+    <button class="regenerate-password">Regenerate Password</button>
+    <button class="copy-password">Copy Password</button>
   </div>
-  <div class="password-length">
+  <div class="password-length-wrapper">
     <button class="decrement-length">-</button>
-    <input type="range" class="password-length-range" value="16" min="1" max="100">
+    <span class="show-password-length"></span>
+    <input type="range" class="password-length" value="20" min="1" max="100">
     <button class="increment-length">+</button>
   </div>
   <div class="customize-password">
 
-    <br><input type="radio" id="random-password" name="password-type" checked><label for="random-password">Random
+    <br><input type="radio" id="password-tab" name="tab" checked><label for="password-tab">Random
       Password</label>
-    <br><input type="radio" id="passphrase" name="password-type"><label for="passphrase">Passphrase</label>
-    <br><input type="radio" id="pin" name="password-type"><label for="pin">pin</label>
+    <br><input type="radio" id="passphrase-tab" name="tab"><label for="passphrase-tab">Passphrase</label>
 
+<br/>
+<br/>
+    <div class="password-tab-content">
+      <input type="checkbox" id="password-uppercase" checked><label for="password-uppercase">Uppercase
+        (A-Z)</label>
+      <br><input type="checkbox" id="password-lowercase" checked><label for="password-lowercase">Lowercase
+        (a-z)</label>
+      <br><input type="checkbox" id="password-numbers" checked><label for="password-numbers">Numbers
+        (0-9)</label>
+      <br><input type="checkbox" id="password-symbols" checked><label for="password-symbols">Symbols
+        (!"#$%&'()*+,-./:;<=>?@[\]^_`{|}~)</label>
+      <br />
+
+    </div>
     <br />
-
-    <br><input type="checkbox" id="random-password-uppercase" checked><label for="random-password-uppercase">Uppercase
-      (A-Z)</label>
-    <br><input type="checkbox" id="random-password-lowercase" checked><label for="random-password-lowercase">Lowercase
-      (a-z)</label>
-    <br><input type="checkbox" id="random-password-numbers" checked><label for="random-password-numbers">Numbers
-      (0-9)</label>
-    <br><input type="checkbox" id="random-password-symbols" checked><label for="random-password-symbols">Symbols
-      (!"#$%&'()*+,-./:;<=>?@[\]^_`{|}~)</label>
-    <br />
-    <br><input type="radio" id="passphrase-mixed-case" checked name="passphrase"><label
-      for="passphrase-mixed-case">Mixed Case</label>
-    <br><input type="radio" id="passphrase-uppercase" name="passphrase"><label
-      for="passphrase-uppercase">Uppercase</label>
-    <br><input type="radio" id="passphrase-lowercase" name="passphrase"><label
-      for="passphrase-lowercase">Lowercase</label>
-    <br><input type="radio" id="passphrase-capitalize" name="passphrase"><label
-      for="passphrase-capitalize">Capitalize</label>
-
-    <br>
+    <div class="passphrase-tab-content">
+      <input type="text" id="passphrase-separator" value="-"><label for="passphrase-capitalize">Separator</label>
+      <br><input type="radio" id="passphrase-lowercase" checked name="passphrase"><label
+        for="passphrase-lowercase">Lowercase</label>
+      <br><input type="radio" id="passphrase-uppercase" name="passphrase"><label
+        for="passphrase-uppercase">Uppercase</label>
+      <br><input type="radio" id="passphrase-capitalize" name="passphrase"><label
+        for="passphrase-capitalize">Capitalize</label>
+      <br><input type="radio" id="passphrase-mixed-case" name="passphrase"><label for="passphrase-mixed-case">Mixed
+        Case</label>
+    </div>
 
   </div>
-
+</div>
 </body>
 
 </html>

@@ -1,14 +1,33 @@
 body {
-  /* background: #000; */
 }
 
+body.very-week {background-color: brown;}
+body.week {background-color: red;}
+body.medium {background-color: pink;}
+body.good {background-color: orange;}
+body.strong {background-color: blue;}
+body.very-strong {background-color: green;}
+body.unbelievable {background-color: #ff0;}
+
+.container {
+  /* background-color: green; */
+max-width: 1366px;
+margin: 0 auto;
+}
 #output {
   /* caret-color: transparent; */
-  width: 100%;
+  /* width: 100%; */
 }
 
-.password-length{
+.password-length-wrapper {
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+#password-tab:checked ~ .passphrase-tab-content {
+  display: none;
+}
+#passphrase-tab:checked ~ .password-tab-content {
+  display: none;
 }
