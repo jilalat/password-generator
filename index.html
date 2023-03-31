@@ -5,61 +5,65 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Roboto+Mono&family=Sarabun:wght@300&family=Ubuntu:wght@400;700&display=swap"
+    rel="stylesheet">
   <link rel="stylesheet" type="text/css" href="./style.css" />
   <script src="./script.js" defer></script>
   <title>Password Generator</title>
 </head>
 
-<body class="very-strong">
+<body class="flex very-strong">
   <div class="container">
-  <h1>Password Generator Plus</h1>
-  <p>Instantly generate a secure, random password with zero effort</p>
-  <div class="generated-password">
-    <input type="text" id="output" readonly>
-    <button class="regenerate-password">Regenerate Password</button>
-    <button class="copy-password">Copy Password</button>
-  </div>
-  <div class="password-length-wrapper">
-    <button class="decrement-length">-</button>
-    <span class="show-password-length"></span>
-    <input type="range" class="password-length" value="20" min="1" max="100">
-    <button class="increment-length">+</button>
-  </div>
-  <div class="customize-password">
+    <h1 class="title">Password Generator Plus</h1>
+    <p class="intro-paragraph">Instantly generate a secure, random password, with zero effort</p>
 
-    <br><input type="radio" id="password-tab" name="tab" checked><label for="password-tab">Random
-      Password</label>
-    <br><input type="radio" id="passphrase-tab" name="tab"><label for="passphrase-tab">Passphrase</label>
-
-<br/>
-<br/>
-    <div class="password-tab-content">
-      <input type="checkbox" id="password-uppercase" checked><label for="password-uppercase">Uppercase
-        (A-Z)</label>
-      <br><input type="checkbox" id="password-lowercase" checked><label for="password-lowercase">Lowercase
-        (a-z)</label>
-      <br><input type="checkbox" id="password-numbers" checked><label for="password-numbers">Numbers
-        (0-9)</label>
-      <br><input type="checkbox" id="password-symbols" checked><label for="password-symbols">Symbols
-        (!"#$%&'()*+,-./:;<=>?@[\]^_`{|}~)</label>
-      <br />
-
-    </div>
-    <br />
-    <div class="passphrase-tab-content">
-      <input type="text" id="passphrase-separator" value="-"><label for="passphrase-capitalize">Separator</label>
-      <br><input type="radio" id="passphrase-lowercase" checked name="passphrase"><label
-        for="passphrase-lowercase">Lowercase</label>
-      <br><input type="radio" id="passphrase-uppercase" name="passphrase"><label
-        for="passphrase-uppercase">Uppercase</label>
-      <br><input type="radio" id="passphrase-capitalize" name="passphrase"><label
-        for="passphrase-capitalize">Capitalize</label>
-      <br><input type="radio" id="passphrase-mixed-case" name="passphrase"><label for="passphrase-mixed-case">Mixed
-        Case</label>
+    <div class="password-output">
+      <div id="output"></div>
+      <!-- <input type="text" id="output" readonly> -->
+      <div class="buttons-wrapper">
+        <button class="regenerate-password password-icon"></button>
+        <button class="copy-password password-icon"></button>
+      </div>
     </div>
 
+    <div class="customize-password">
+      <input type="radio" id="password-tab" class="tab" name="tab" checked><label for="password-tab">Random
+        Password</label>
+      <input type="radio" id="passphrase-tab" class="tab" name="tab"><label for="passphrase-tab">Passphrase</label>
+      <div class="tab-content">
+        <div class="password-length-wrapper flex">
+          <button class="decrement-length">-</button>
+          <span class="show-password-length"></span>
+          <input type="range" class="password-length" value="20" min="1" max="100">
+          <button class="increment-length">+</button>
+        </div>
+
+        <div class="password-tab-content tab-pass-content">
+          <input type="checkbox" id="password-lowercase" checked><label for="password-lowercase">lowercase</label>
+          <input type="checkbox" id="password-uppercase" checked><label for="password-uppercase">UPPERCASE</label>
+          <input type="checkbox" id="password-numbers" checked><label for="password-numbers">Numbers</label>
+          <input type="checkbox" id="password-symbols" checked><label for="password-symbols">Symbols</label>
+        </div>
+
+        <div class="passphrase-tab-content tab-pass-content">
+          <div class="separator">
+            <label for="passphrase-capitalize">Separator</label><input type="text" id="passphrase-separator" value="-">
+          </div>
+          <input type="radio" id="passphrase-lowercase" class="radio-passphrase" checked name="passphrase"><label
+            for="passphrase-lowercase">lowercase</label>
+          <input type="radio" id="passphrase-uppercase" class="radio-passphrase" name="passphrase"><label
+            for="passphrase-uppercase">UPPERCASE</label>
+          <input type="radio" id="passphrase-capitalize" class="radio-passphrase" name="passphrase"><label
+            for="passphrase-capitalize">Capitalize</label>
+          <input type="radio" id="passphrase-mixed-case" class="radio-passphrase" name="passphrase"><label for="passphrase-mixed-case">MiXEd
+            cAsE</label>
+        </div>
+      </div>
+    </div>
   </div>
-</div>
 </body>
 
 </html>

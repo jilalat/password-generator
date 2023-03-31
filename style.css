@@ -1,33 +1,220 @@
+:root {
+  /* --white-color: #ffffff; */
+  --very-week-color: #d1364e;
+  --week-color: #ff3f46;
+  --medium-color: #fe6f35;
+  --good-color: #fcae1e;
+  --strong-color: #9dce5b;
+  --very-strong-color: #3ded97;
+  --unbelievable-color: #00b4d8;
+  --tab-background: rgba(255, 255, 255, 0.9);
+  --container-padding: 24px;
+}
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
 body {
+  height: 100vh;
+  color: rgba(0, 0, 0, 0.85);
 }
 
-body.very-week {background-color: brown;}
-body.week {background-color: red;}
-body.medium {background-color: pink;}
-body.good {background-color: orange;}
-body.strong {background-color: blue;}
-body.very-strong {background-color: green;}
-body.unbelievable {background-color: #ff0;}
-
+body.very-week {
+  background-color: var(--very-week-color);
+}
+body.week {
+  background-color: var(--week-color);
+}
+body.medium {
+  background-color: var(--medium-color);
+}
+body.good {
+  background-color: var(--good-color);
+}
+body.strong {
+  background-color: var(--strong-color);
+}
+body.very-strong {
+  background-color: var(--very-strong-color);
+}
+body.unbelievable {
+  background-color: var(--unbelievable-color);
+}
 .container {
-  /* background-color: green; */
-max-width: 1366px;
-margin: 0 auto;
+  max-width: calc(1366px + var(--container-padding));
+  padding: 0 var(--container-padding);
+  margin: 0 auto;
+  /* background: #000; */
 }
-#output {
-  /* caret-color: transparent; */
-  /* width: 100%; */
+.flex {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-.password-length-wrapper {
+.title {
+  font-size: clamp(32px, 4vw, 56px);
+  text-align: center;
+  font-family: 'Ubuntu', sans-serif;
+  font-weight: 700;
+}
+.intro-paragraph {
+  font-size: clamp(16px, 3vw, 28px);
+  text-align: center;
+  margin: 16px 0 clamp(40px, 4vw, 64px);
+  /* background: #000; */
+  font-family: 'Roboto Mono', monospace;
+}
+
+.password-output {
+  /* width: ; */
+
+  /* background: #fff; */
+  border-radius: 2px;
+  overflow: hidden;
+  position: relative;
+  /* border: 2px solid #000; */
+  padding: clamp(12px, 1vw, 20px) clamp(92px, 1vw, 96px) clamp(12px, 1vw, 20px)
+    clamp(14px, 2vw, 32px);
+  background-color: #fff;
+  box-shadow: rgb(0, 0, 0) -1px 4px 10px -1px;
+  max-width: 768px;
+  margin: 0 auto;
+  /* margin: 16px 0 clamp(40px, 4vw, 64px); */
+}
+
+#output {
+  /* border-radius: 24px; */
+  /* caret-color: transparent; */
+  /* padding: 0 120px 0 20px; */
+  width: 100%;
+  /* height: 100%; */
+  /* min-height: 50px; */
   display: flex;
   align-items: center;
-  justify-content: center;
+  /* background: #f00; */
+  /* outline: none; */
+  /* border: none; */
+  line-break: normal;
+  word-break: break-all;
+  /* -moz-user-select: none; */
+  /* -webkit-user-select: none; */
+  /* -khtml-user-select: none; */
+  /* user-select: none; */
+
+  -webkit-user-select: none; /* Safari */
+  -ms-user-select: none; /* IE 10 and IE 11 */
+  user-select: none; /* Standard syntax */
+
+  /* cursor: default; */
+  /* font-family: 'Barlow Condensed', sans-serif; */
 }
 
-#password-tab:checked ~ .passphrase-tab-content {
+.buttons-wrapper {
+  position: absolute;
+  top: 0;
+  right: 20px;
+  display: flex;
+  /* flex-direction: column; */
+  justify-content: space-between;
+  align-items: center;
+  height: 100%;
+  /* background: #f00; */
+  width: 60px;
+}
+.password-icon {
+  width: 24px;
+  height: 24px;
+  border: none;
+  cursor: pointer;
+  background-color: transparent;
+  transition: all 0.2s ease-in-out;
+  background-size: contain;
+  opacity: 0.3;
+}
+.password-icon:hover {
+  transform: scale(1.05);
+  opacity: 1;
+}
+.regenerate-password {
+  /* display: inline-block; */
+  background-image: url('./images/regenerate.png');
+}
+.copy-password {
+  background-image: url('./images/copy.png');
+  /* display: inline-block; */
+}
+
+.customize-password {
+  /* background: #0ff; */
+  margin-top: clamp(40px, 4vw, 64px);
+  font-family: 'Sarabun', sans-serif;
+  min-width: 299px;
+  /* text-align: center; */
+  /* background: #0ff; */
+}
+
+.tab {
   display: none;
 }
-#passphrase-tab:checked ~ .password-tab-content {
+.tab + label {
+  font-size: clamp(16px, 1.5vw, 20px);
+  font-family: 'Ubuntu', sans-serif;
+  font-weight: 400;
+  opacity: 0.6;
+  display: inline-block;
+  padding: 12px 20px;
+  cursor: pointer;
+}
+.tab:checked + label {
+  background-color: var(--tab-background);
+  border-bottom: 0;
+  opacity: 1;
+  border-radius: clamp(12px, 1vw, 16px) clamp(12px, 1vw, 16px)  0 0;
+}
+#password-tab:checked  ~ .passphrase-tab-content {
   display: none;
+}
+#password-tab:checked ~ .password-tab-content {
+}
+#passphrase-tab:checked  ~ .password-tab-content {
+  display: none;
+}
+.tab-pass-content {
+  background: #0ff;
+  height: 50px;
+  /* margin-top: clamp(26px, 2vw, 32px); */
+  width: fit-content;
+  margin: clamp(26px, 2vw, 32px) auto 0;
+}
+.tab-pass-content input{
+/* display: none; */
+  /* height: 50px; */
+  /* margin-top: clamp(26px, 2vw, 32px); */
+  /* width: fit-content; */
+  /* margin: clamp(26px, 2vw, 32px) auto 0; */
+}
+.tab-pass-content > input:checked + label {
+  /* background: #00f; */
+  
+  /* height: 50px; */
+  /* margin-top: clamp(26px, 2vw, 32px); */
+  /* width: fit-content; */
+  /* margin: clamp(26px, 2vw, 32px) auto 0; */
+}
+.tab-pass-content > label {
+  /* background: #00f; */
+  /* height: 50px; */
+  /* margin-top: clamp(26px, 2vw, 32px); */
+  /* width: fit-content; */
+  /* margin: clamp(26px, 2vw, 32px) auto 0; */
+}
+.tab-content {
+  padding: clamp(36px, 5vw, 72px) clamp(14px, 2vw, 32px);
+  background-color: var(--tab-background);
+  
+}
+.password-length-wrapper {
 }
