@@ -603,6 +603,7 @@ const getPassPhraseCase = () => {
   let filterdCharacters = getAvailableCharacters();
   showPasswordLength.textContent = passwordLength.value;
   passwordLength.setAttribute('value', passwordLength.value);
+  showPasswordLength.style.left = `${passwordLength.value - 1}%`;
   for (i = 0; i < passwordLength.value; i++) {
     const randomIndex = Math.floor(Math.random() * filterdCharacters.length);
     password += filterdCharacters[randomIndex];
@@ -699,11 +700,13 @@ passwordTab.addEventListener('change', () => {
   passwordLength.value = 20;
   generatePassword();
   checkPasswordStrength();
+  showPasswordLength.style.left = `${passwordLength.value - 1}%`;
 });
 passphraseTab.addEventListener('change', () => {
   passwordLength.value = 6;
   generatePassPhrase();
   checkPasswordStrength();
+  showPasswordLength.style.left = `${passwordLength.value - 1}%`;
 });
 
 regeneratePassword.addEventListener('click', () => {
@@ -717,6 +720,8 @@ copyPassword.addEventListener('click', () => {
 passwordLength.addEventListener('change', () => {
   isRandomPasswordOrPassPhrase();
   checkPasswordStrength();
+  showPasswordLength.style.left = `${passwordLength.value - 1}%`;
+  // showPasswordLength.style.left = "200px";
 });
 passwordLength.addEventListener('mousedown', () => {
   passwordLengthMouseDownState = true;
@@ -727,17 +732,20 @@ passwordLength.addEventListener('mouseup', () => {
 passwordLength.addEventListener('mousemove', () => {
   passwordLengthMouseDownState && isRandomPasswordOrPassPhrase();
   checkPasswordStrength();
+  showPasswordLength.style.left = `${passwordLength.value - 1}%`;
 });
 
 incrementPasswordLength.addEventListener('click', () => {
   passwordLength.value < 100 && passwordLength.value++;
   isRandomPasswordOrPassPhrase();
   checkPasswordStrength();
+  showPasswordLength.style.left = `${passwordLength.value - 1}%`;
 });
 decrementPasswordLength.addEventListener('click', () => {
   passwordLength.value > 1 && passwordLength.value--;
   isRandomPasswordOrPassPhrase();
   checkPasswordStrength();
+  showPasswordLength.style.left = `${passwordLength.value - 1}%`;
 });
 
 PASSWORD_INPUTS.forEach(item => {

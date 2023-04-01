@@ -8,7 +8,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link
-    href="https://fonts.googleapis.com/css2?family=Roboto+Mono&family=Sarabun:wght@300&family=Ubuntu:wght@400;700&display=swap"
+    href="https://fonts.googleapis.com/css2?family=Roboto+Mono&family=Sarabun:wght@300&family=Ubuntu:wght@400;500;700&display=swap"
     rel="stylesheet">
   <link rel="stylesheet" type="text/css" href="./style.css" />
   <script src="./script.js" defer></script>
@@ -18,7 +18,7 @@
 <body class="flex very-strong">
   <div class="container">
     <h1 class="title">Password Generator Plus</h1>
-    <p class="intro-paragraph">Instantly generate a secure, random password, with zero effort</p>
+    <p class="intro-paragraph">Instantly generate a secure, random password or passphrase, with zero effort</p>
 
     <div class="password-output">
       <div id="output"></div>
@@ -28,6 +28,9 @@
         <button class="copy-password password-icon"></button>
       </div>
     </div>
+    <div class="separator">
+      <label for="passphrase-capitalize">Separator</label><input type="text" id="passphrase-separator" value="-">
+    </div>
 
     <div class="customize-password">
       <input type="radio" id="password-tab" class="tab" name="tab" checked><label for="password-tab">Random
@@ -35,30 +38,36 @@
       <input type="radio" id="passphrase-tab" class="tab" name="tab"><label for="passphrase-tab">Passphrase</label>
       <div class="tab-content">
         <div class="password-length-wrapper flex">
+          <div class="length">
+            <input type="range" class="password-length" value="20" min="1" max="100">
+            <div  class="show-password-length-wrapper">
+              <span class="show-password-length"></span>
+            </div>
+          </div>
           <button class="decrement-length">-</button>
-          <span class="show-password-length"></span>
-          <input type="range" class="password-length" value="20" min="1" max="100">
           <button class="increment-length">+</button>
         </div>
 
-        <div class="password-tab-content tab-pass-content">
-          <input type="checkbox" id="password-lowercase" checked><label for="password-lowercase">lowercase</label>
-          <input type="checkbox" id="password-uppercase" checked><label for="password-uppercase">UPPERCASE</label>
-          <input type="checkbox" id="password-numbers" checked><label for="password-numbers">Numbers</label>
-          <input type="checkbox" id="password-symbols" checked><label for="password-symbols">Symbols</label>
+        <div class="password-tab-content tab-pass-content flex">
+          <input type="checkbox" id="password-lowercase" class="checkbox" checked><label
+            for="password-lowercase">lowercase</label>
+          <input type="checkbox" id="password-uppercase" class="checkbox" checked><label
+            for="password-uppercase">UPPERCASE</label>
+          <input type="checkbox" id="password-numbers" class="checkbox" checked><label
+            for="password-numbers">Numbers</label>
+          <input type="checkbox" id="password-symbols" class="checkbox" checked><label
+            for="password-symbols">Symbols</label>
         </div>
 
-        <div class="passphrase-tab-content tab-pass-content">
-          <div class="separator">
-            <label for="passphrase-capitalize">Separator</label><input type="text" id="passphrase-separator" value="-">
-          </div>
-          <input type="radio" id="passphrase-lowercase" class="radio-passphrase" checked name="passphrase"><label
-            for="passphrase-lowercase">lowercase</label>
-          <input type="radio" id="passphrase-uppercase" class="radio-passphrase" name="passphrase"><label
+        <div class="passphrase-tab-content tab-pass-content flex">
+          <input type="radio" id="passphrase-lowercase" class="radio-passphrase checkbox" checked
+            name="passphrase"><label for="passphrase-lowercase">lowercase</label>
+          <input type="radio" id="passphrase-uppercase" class="radio-passphrase checkbox" name="passphrase"><label
             for="passphrase-uppercase">UPPERCASE</label>
-          <input type="radio" id="passphrase-capitalize" class="radio-passphrase" name="passphrase"><label
+          <input type="radio" id="passphrase-capitalize" class="radio-passphrase checkbox" name="passphrase"><label
             for="passphrase-capitalize">Capitalize</label>
-          <input type="radio" id="passphrase-mixed-case" class="radio-passphrase" name="passphrase"><label for="passphrase-mixed-case">MiXEd
+          <input type="radio" id="passphrase-mixed-case" class="radio-passphrase checkbox" name="passphrase"><label
+            for="passphrase-mixed-case">MiXEd
             cAsE</label>
         </div>
       </div>
