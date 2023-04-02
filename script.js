@@ -1,4 +1,5 @@
 const body = document.querySelector('body');
+const introParagraph = document.querySelector('.intro-paragraph');
 
 const output = document.getElementById('output');
 
@@ -558,6 +559,20 @@ const wordsList = [
   'hissing',
 ];
 
+const introParagraphText =
+  'Instantly generate a secure, random password or passphrase, with zero effort';
+
+let j = 0;
+const typing = () => {
+  if (j < introParagraphText.length) {
+  // for (let j = 0; j < introParagraphText.length; j++) {
+    // console.log(introParagraphText.charAt(j));
+    introParagraph.innerHTML = introParagraphText.substring(0, j);
+    j += 1;
+  }
+};
+setInterval(typing, 200);
+
 const getAvailableCharacters = () => {
   let availableCharacters = '';
 
@@ -667,7 +682,7 @@ const generatePassPhrase = () => {
     );
     PassPhrase.push(filteredPassPhraseCase[randomIndex]);
   }
-  output.textContent = PassPhrase.join(" - ");
+  output.textContent = PassPhrase.join(' - ');
 };
 
 const isRandomPasswordOrPassPhrase = () => {
@@ -680,8 +695,12 @@ regeneratePassword.addEventListener('click', () => {
 
 copyPassword.addEventListener('click', () => {
   navigator.clipboard.writeText(output.textContent);
-  setTimeout(() => {inputBtnsWrapper.classList.add("show-copied-pop-up")}, 0)
-  setTimeout(() => {inputBtnsWrapper.classList.remove("show-copied-pop-up")}, 1000)
+  setTimeout(() => {
+    inputBtnsWrapper.classList.add('show-copied-pop-up');
+  }, 0);
+  setTimeout(() => {
+    inputBtnsWrapper.classList.remove('show-copied-pop-up');
+  }, 1000);
 });
 
 passwordTab.addEventListener('change', () => {
@@ -721,7 +740,6 @@ PASSWORD_INPUTS.forEach(item => {
     generatePassword();
   });
 });
-
 
 PASSPHRASE_RADIOS.forEach(item => {
   item.addEventListener('change', () => {
