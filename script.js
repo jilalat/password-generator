@@ -5,6 +5,7 @@ const output = document.getElementById('output');
 const passwordTab = document.getElementById('password-tab');
 const passphraseTab = document.getElementById('passphrase-tab');
 
+const inputBtnsWrapper = document.querySelector('.buttons-wrapper');
 const regeneratePassword = document.querySelector('.regenerate-password');
 const copyPassword = document.querySelector('.copy-password');
 
@@ -18,7 +19,6 @@ const passwordLowercase = document.getElementById('password-lowercase');
 const passwordNumbers = document.getElementById('password-numbers');
 const passwordSymbols = document.getElementById('password-symbols');
 
-const passPhraseSeparator = document.getElementById('passphrase-separator');
 const passPhraseLowercase = document.getElementById('passphrase-lowercase');
 const passPhraseUppercase = document.getElementById('passphrase-uppercase');
 const passPhraseCapitalize = document.getElementById('passphrase-capitalize');
@@ -562,7 +562,7 @@ const getAvailableCharacters = () => {
   let availableCharacters = '';
 
   if (PASSWORD_INPUTS.every(item => !item.checked))
-  passwordLowercase.checked = 'checked';
+    passwordLowercase.checked = 'checked';
 
   if (passwordLowercase.checked) availableCharacters += LOWERCASE_CHARACTERS;
   if (passwordUppercase.checked) availableCharacters += UPPERCASE_CHARACTERS;
@@ -598,15 +598,57 @@ const getPassPhraseCase = () => {
   return passPhraseCase;
 };
 
+const getBodyClassesInCasePasswordTabIschecked = () => {
+  return `flex ${
+    passwordLength.value >= 1 && passwordLength.value <= 3
+      ? 'very-week'
+      : passwordLength.value >= 4 && passwordLength.value <= 7
+      ? 'week'
+      : passwordLength.value >= 8 && passwordLength.value <= 11
+      ? 'medium'
+      : passwordLength.value >= 12 && passwordLength.value <= 15
+      ? 'good'
+      : passwordLength.value >= 16 && passwordLength.value <= 19
+      ? 'strong'
+      : passwordLength.value >= 20 && passwordLength.value <= 63
+      ? 'very-strong'
+      : 'unbelievable'
+  }`;
+};
+const getBodyClassesInCasePassPhraseTabIschecked = () => {
+  return `flex ${
+    passwordLength.value == 1
+      ? 'very-week'
+      : passwordLength.value == 2
+      ? 'week'
+      : passwordLength.value == 3
+      ? 'medium'
+      : passwordLength.value == 4
+      ? 'good'
+      : passwordLength.value == 5
+      ? 'strong'
+      : passwordLength.value == 6
+      ? 'very-strong'
+      : 'unbelievable'
+  }`;
+};
+
+const checkPasswordStrength = () => {
+  body.classList = passwordTab.checked
+    ? getBodyClassesInCasePasswordTabIschecked()
+    : getBodyClassesInCasePassPhraseTabIschecked();
+  showPasswordLength.style.left = `${passwordLength.value - 1}%`;
+};
+
 (generatePassword = () => {
   let password = '';
-  let filterdCharacters = getAvailableCharacters();
+  let filteredCharacters = getAvailableCharacters();
   showPasswordLength.textContent = passwordLength.value;
   passwordLength.setAttribute('value', passwordLength.value);
-  showPasswordLength.style.left = `${passwordLength.value - 1}%`;
+  checkPasswordStrength();
   for (i = 0; i < passwordLength.value; i++) {
-    const randomIndex = Math.floor(Math.random() * filterdCharacters.length);
-    password += filterdCharacters[randomIndex];
+    const randomIndex = Math.floor(Math.random() * filteredCharacters.length);
+    password += filteredCharacters[randomIndex];
   }
   // console.log(output)
   // output.value = password;
@@ -615,99 +657,22 @@ const getPassPhraseCase = () => {
 
 const generatePassPhrase = () => {
   let PassPhrase = [];
-  let filterdPassPhraseCase = getPassPhraseCase();
+  let filteredPassPhraseCase = getPassPhraseCase();
   showPasswordLength.textContent = passwordLength.value;
   passwordLength.setAttribute('value', passwordLength.value);
-  let separator = passPhraseSeparator.value || ' ';
+  checkPasswordStrength();
   for (i = 0; i < passwordLength.value; i++) {
     const randomIndex = Math.floor(
-      Math.random() * filterdPassPhraseCase.length
+      Math.random() * filteredPassPhraseCase.length
     );
-    PassPhrase.push(filterdPassPhraseCase[randomIndex]);
+    PassPhrase.push(filteredPassPhraseCase[randomIndex]);
   }
-  output.textContent = PassPhrase.join(separator);
-};
-// console.log(body.classList)
-// const addPasswordStrengthClassToBody = (class) => body.classList.add(class);
-
-const checkPasswordStrength = () => {
-  if (passwordTab.checked) {
-    if (passwordLength.value >= 1 && passwordLength.value <= 3) {
-      body.classList = 'flex';
-      body.classList.add('very-week');
-    }
-    if (passwordLength.value >= 4 && passwordLength.value <= 7) {
-      body.classList = 'flex';
-      body.classList.add('week');
-    }
-    if (passwordLength.value >= 8 && passwordLength.value <= 11) {
-      body.classList = 'flex';
-      body.classList.add('medium');
-    }
-    if (passwordLength.value >= 12 && passwordLength.value <= 15) {
-      body.classList = 'flex';
-      body.classList.add('good');
-    }
-    if (passwordLength.value >= 16 && passwordLength.value <= 19) {
-      body.classList = 'flex';
-      body.classList.add('strong');
-    }
-    if (passwordLength.value >= 20 && passwordLength.value <= 63) {
-      body.classList = 'flex';
-      body.classList.add('very-strong');
-    }
-    if (passwordLength.value >= 64) {
-      body.classList = 'flex';
-      body.classList.add('unbelievable');
-    }
-  } else {
-    if (passwordLength.value == 1) {
-      body.classList = 'flex';
-      body.classList.add('very-week');
-    }
-    if (passwordLength.value == 2) {
-      body.classList = 'flex';
-      body.classList.add('week');
-    }
-    if (passwordLength.value == 3) {
-      body.classList = 'flex';
-      body.classList.add('medium');
-    }
-    if (passwordLength.value == 4) {
-      body.classList = 'flex';
-      body.classList.add('good');
-    }
-    if (passwordLength.value == 5) {
-      body.classList = 'flex';
-      body.classList.add('strong');
-    }
-    if (passwordLength.value == 6) {
-      body.classList = 'flex';
-      body.classList.add('very-strong');
-    }
-    if (passwordLength.value > 6) {
-      body.classList = 'flex';
-      body.classList.add('unbelievable');
-    }
-  }
+  output.textContent = PassPhrase.join(" - ");
 };
 
 const isRandomPasswordOrPassPhrase = () => {
   passwordTab.checked ? generatePassword() : generatePassPhrase();
 };
-
-passwordTab.addEventListener('change', () => {
-  passwordLength.value = 20;
-  generatePassword();
-  checkPasswordStrength();
-  showPasswordLength.style.left = `${passwordLength.value - 1}%`;
-});
-passphraseTab.addEventListener('change', () => {
-  passwordLength.value = 6;
-  generatePassPhrase();
-  checkPasswordStrength();
-  showPasswordLength.style.left = `${passwordLength.value - 1}%`;
-});
 
 regeneratePassword.addEventListener('click', () => {
   isRandomPasswordOrPassPhrase();
@@ -715,83 +680,51 @@ regeneratePassword.addEventListener('click', () => {
 
 copyPassword.addEventListener('click', () => {
   navigator.clipboard.writeText(output.textContent);
+  setTimeout(() => {inputBtnsWrapper.classList.add("show-copied-pop-up")}, 0)
+  setTimeout(() => {inputBtnsWrapper.classList.remove("show-copied-pop-up")}, 1000)
 });
 
+passwordTab.addEventListener('change', () => {
+  passwordLength.value = 20;
+  generatePassword();
+  // checkPasswordStrength();
+  // showPasswordLength.style.left = `${passwordLength.value - 1}%`;
+});
 
-
-
-
+passphraseTab.addEventListener('change', () => {
+  passwordLength.value = 6;
+  generatePassPhrase();
+  // checkPasswordStrength();
+  // showPasswordLength.style.left = `${passwordLength.value - 1}%`;
+});
 
 passwordLength.addEventListener('input', () => {
   isRandomPasswordOrPassPhrase();
-  checkPasswordStrength();
-  showPasswordLength.style.left = `${passwordLength.value - 1}%`;
-  // showPasswordLength.style.left = "200px";
-});
-// passwordLength.addEventListener('mousedown', () => {
-//   passwordLengthMouseDownState = true;
-// });
-// passwordLength.addEventListener('touchstart', () => {
-  // console.log(passwordLength.value);
-  // isRandomPasswordOrPassPhrase();
-  // passwordLengthMouseDownState = true;
-  // isRandomPasswordOrPassPhrase();
   // checkPasswordStrength();
   // showPasswordLength.style.left = `${passwordLength.value - 1}%`;
-// });
-// passwordLength.addEventListener('mouseup', () => {
-//   passwordLengthMouseDownState = false;
-// });
-// passwordLength.addEventListener('touchend', () => {
-  // console.log(passwordLength.value);
-  // passwordLengthMouseDownState = false;
-// });
-// passwordLength.addEventListener('mousemove', () => {
-//   passwordLengthMouseDownState && isRandomPasswordOrPassPhrase();
-//   checkPasswordStrength();
-//   showPasswordLength.style.left = `${passwordLength.value - 1}%`;
-// });
-
-// passwordLength.addEventListener('touchmove', () => {
-//   isRandomPasswordOrPassPhrase();
-//   checkPasswordStrength();
-//   showPasswordLength.style.left = `${passwordLength.value - 1}%`;
-//   console.log(passwordLength.value);
-// });
-
-
-
-
-
-
-
+});
 
 incrementPasswordLength.addEventListener('click', () => {
   passwordLength.value < 100 && passwordLength.value++;
   isRandomPasswordOrPassPhrase();
-  checkPasswordStrength();
-  showPasswordLength.style.left = `${passwordLength.value - 1}%`;
+  // checkPasswordStrength();
 });
+
 decrementPasswordLength.addEventListener('click', () => {
   passwordLength.value > 1 && passwordLength.value--;
   isRandomPasswordOrPassPhrase();
-  checkPasswordStrength();
-  showPasswordLength.style.left = `${passwordLength.value - 1}%`;
+  // checkPasswordStrength();
 });
 
 PASSWORD_INPUTS.forEach(item => {
   item.addEventListener('change', () => {
-    // getAvailableCharacters();
     generatePassword();
   });
 });
-passPhraseSeparator.addEventListener('input', () => {
-  // getPassPhraseCase();
-  generatePassPhrase();
-});
+
+
 PASSPHRASE_RADIOS.forEach(item => {
   item.addEventListener('change', () => {
-    getPassPhraseCase();
     generatePassPhrase();
   });
 });

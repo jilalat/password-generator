@@ -15,21 +15,18 @@
   <title>Password Generator</title>
 </head>
 
-<body class="flex very-strong">
+<body>
+  <!-- <body class="flex very-strong"> -->
   <div class="container">
     <h1 class="title">Password Generator Plus</h1>
     <p class="intro-paragraph">Instantly generate a secure, random password or passphrase, with zero effort</p>
 
     <div class="password-output">
       <div id="output"></div>
-      <!-- <input type="text" id="output" readonly> -->
       <div class="buttons-wrapper">
         <button class="regenerate-password password-icon"></button>
         <button class="copy-password password-icon"></button>
       </div>
-    </div>
-    <div class="separator">
-      <label for="passphrase-capitalize">Separator</label><input type="text" id="passphrase-separator" value="-">
     </div>
 
     <div class="customize-password">
@@ -40,7 +37,7 @@
         <div class="password-length-wrapper flex">
           <div class="length">
             <input type="range" class="password-length" value="20" min="1" max="100">
-            <div  class="show-password-length-wrapper">
+            <div class="show-password-length-wrapper">
               <span class="show-password-length"></span>
             </div>
           </div>
