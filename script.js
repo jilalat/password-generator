@@ -24,7 +24,7 @@ const passPhraseUppercase = document.getElementById('passphrase-uppercase');
 const passPhraseCapitalize = document.getElementById('passphrase-capitalize');
 const passPhraseMixedCase = document.getElementById('passphrase-mixed-case');
 
-let passwordLengthMouseDownState = false;
+// let passwordLengthMouseDownState = false;
 
 const getRandomCharacters = (start, end) => {
   let Characters = '';
@@ -717,23 +717,54 @@ copyPassword.addEventListener('click', () => {
   navigator.clipboard.writeText(output.textContent);
 });
 
-passwordLength.addEventListener('change', () => {
+
+
+
+
+
+passwordLength.addEventListener('input', () => {
   isRandomPasswordOrPassPhrase();
   checkPasswordStrength();
   showPasswordLength.style.left = `${passwordLength.value - 1}%`;
   // showPasswordLength.style.left = "200px";
 });
-passwordLength.addEventListener('mousedown', () => {
-  passwordLengthMouseDownState = true;
-});
-passwordLength.addEventListener('mouseup', () => {
-  passwordLengthMouseDownState = false;
-});
-passwordLength.addEventListener('mousemove', () => {
-  passwordLengthMouseDownState && isRandomPasswordOrPassPhrase();
-  checkPasswordStrength();
-  showPasswordLength.style.left = `${passwordLength.value - 1}%`;
-});
+// passwordLength.addEventListener('mousedown', () => {
+//   passwordLengthMouseDownState = true;
+// });
+// passwordLength.addEventListener('touchstart', () => {
+  // console.log(passwordLength.value);
+  // isRandomPasswordOrPassPhrase();
+  // passwordLengthMouseDownState = true;
+  // isRandomPasswordOrPassPhrase();
+  // checkPasswordStrength();
+  // showPasswordLength.style.left = `${passwordLength.value - 1}%`;
+// });
+// passwordLength.addEventListener('mouseup', () => {
+//   passwordLengthMouseDownState = false;
+// });
+// passwordLength.addEventListener('touchend', () => {
+  // console.log(passwordLength.value);
+  // passwordLengthMouseDownState = false;
+// });
+// passwordLength.addEventListener('mousemove', () => {
+//   passwordLengthMouseDownState && isRandomPasswordOrPassPhrase();
+//   checkPasswordStrength();
+//   showPasswordLength.style.left = `${passwordLength.value - 1}%`;
+// });
+
+// passwordLength.addEventListener('touchmove', () => {
+//   isRandomPasswordOrPassPhrase();
+//   checkPasswordStrength();
+//   showPasswordLength.style.left = `${passwordLength.value - 1}%`;
+//   console.log(passwordLength.value);
+// });
+
+
+
+
+
+
+
 
 incrementPasswordLength.addEventListener('click', () => {
   passwordLength.value < 100 && passwordLength.value++;
