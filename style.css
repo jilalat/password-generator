@@ -43,6 +43,15 @@ body.very-strong {
 body.unbelievable {
   background-color: var(--unbelievable-color);
 }
+
+input,
+textarea,
+button,
+select,
+a {
+  -webkit-tap-highlight-color: transparent;
+}
+
 .container {
   max-width: calc(768px + var(--container-padding));
   padding: 0 var(--container-padding);
