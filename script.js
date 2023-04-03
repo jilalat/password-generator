@@ -687,11 +687,13 @@ const isRandomPasswordOrPassPhrase = () => {
   passwordTab.checked ? generatePassword() : generatePassPhrase();
 };
 
-regeneratePassword.addEventListener('click', () => {
+regeneratePassword.addEventListener('click', (e) => {
+  e.preventDefault();
   isRandomPasswordOrPassPhrase();
 });
 
-copyPassword.addEventListener('click', () => {
+copyPassword.addEventListener('click', (e) => {
+  e.preventDefault();
   navigator.clipboard.writeText(output.textContent);
   setTimeout(() => {
     inputBtnsWrapper.classList.add('show-copied-pop-up');
@@ -715,12 +717,14 @@ passwordLength.addEventListener('input', () => {
   isRandomPasswordOrPassPhrase();
 });
 
-incrementPasswordLength.addEventListener('click', () => {
+incrementPasswordLength.addEventListener('click', (e) => {
+  e.preventDefault();
   passwordLength.value < 100 && passwordLength.value++;
   isRandomPasswordOrPassPhrase();
 });
 
-decrementPasswordLength.addEventListener('click', () => {
+decrementPasswordLength.addEventListener('click', (e) => {
+  e.preventDefault();
   passwordLength.value > 1 && passwordLength.value--;
   isRandomPasswordOrPassPhrase();
 });
