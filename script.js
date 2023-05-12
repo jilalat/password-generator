@@ -38,6 +38,8 @@ const getRandomCharactersFromCharCode = (start, end) => {
 };
 
 let wordsList = [];
+let passPhraseCase = [];
+let casedPassPhrase = [];
 
 fetch('https://random-word-api.herokuapp.com/word?number=1000')
   .then(response => response.json())
@@ -54,13 +56,6 @@ const PASSWORD_CHECKBOXES = [
   passwordSymbols,
 ];
 
-const PASSPHRASE_CHECKBOXES = [
-  passPhraseLowercase,
-  passPhraseUppercase,
-  passPhraseCapitalize,
-  passPhraseMixedCase,
-];
-
 const UPPERCASE_CHARACTERS = getRandomCharactersFromCharCode(65, 90);
 const LOWERCASE_CHARACTERS = UPPERCASE_CHARACTERS.toLowerCase();
 const NUMBERS_CHARACTERS = getRandomCharactersFromCharCode(48, 57);
@@ -71,15 +66,15 @@ const SYMBOLS_CHARACTERS = getRandomCharactersFromCharCode(33, 47)
 
 const introParagraphText =
   'Instantly generate a secure, random password or passphrase, with zero effort';
-
 let introParagraphTextIndex = 0;
+
 const typing = () => {
   if (introParagraphTextIndex < introParagraphText.length) {
     introParagraph.innerHTML = introParagraphText.substring(
       0,
       introParagraphTextIndex
     );
-    introParagraphTextIndex += 1;
+    introParagraphTextIndex++;
   }
 };
 setTimeout(setInterval(typing, 100), 0);
@@ -114,15 +109,12 @@ const setWordInMixedCase = word => {
 const setWordsInMixedCase = wordsList => wordsList.map(setWordInMixedCase);
 
 const getPassPhraseCase = () => {
-  let passPhraseCase = [];
-
   if (passPhraseLowercase.checked) passPhraseCase = wordsList;
   if (passPhraseUppercase.checked)
     passPhraseCase = wordsList.map(word => word.toUpperCase());
   if (passPhraseCapitalize.checked) passPhraseCase = capitalizeWords(wordsList);
   if (passPhraseMixedCase.checked)
     passPhraseCase = setWordsInMixedCase(wordsList);
-
   return passPhraseCase;
 };
 
@@ -198,6 +190,7 @@ const generatePassPhrase = () => {
     );
     PassPhrase.push(filteredPassPhraseCase[randomIndex]);
   }
+  casedPassPhrase = PassPhrase;
   output.textContent = PassPhrase.join(' - ');
 };
 
@@ -266,8 +259,19 @@ PASSWORD_CHECKBOXES.forEach(item => {
   });
 });
 
-PASSPHRASE_CHECKBOXES.forEach(item => {
-  item.addEventListener('change', () => {
-    generatePassPhrase();
-  });
+passPhraseLowercase.addEventListener('change', () => {
+  output.textContent = casedPassPhrase
+    .map(word => word.toLowerCase())
+    .join(' - ');
+});
+passPhraseUppercase.addEventListener('change', () => {
+  output.textContent = casedPassPhrase
+    .map(word => word.toUpperCase())
+    .join(' - ');
+});
+passPhraseCapitalize.addEventListener('change', () => {
+  output.textContent = capitalizeWords(casedPassPhrase).join(' - ');
+});
+passPhraseMixedCase.addEventListener('change', () => {
+  output.textContent = setWordsInMixedCase(casedPassPhrase).join(' - ');
 });
