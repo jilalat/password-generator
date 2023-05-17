@@ -1,4 +1,3 @@
-const body = document.querySelector('body');
 const introParagraph = document.querySelector('.intro-paragraph');
 
 const output = document.getElementById('output');
@@ -69,7 +68,7 @@ const introParagraphText =
 let introParagraphTextIndex = 0;
 
 const typing = () => {
-  if (introParagraphTextIndex < introParagraphText.length) {
+  if (introParagraphTextIndex <= introParagraphText.length) {
     introParagraph.innerHTML = introParagraphText.substring(
       0,
       introParagraphTextIndex
@@ -154,7 +153,7 @@ const addBackgroundClassToBodyInCasePassPhraseTabIsChecked = () => {
 };
 
 const checkPasswordStrength = () => {
-  body.classList = passwordTab.checked
+  document.body.classList = passwordTab.checked
     ? addBackgroundClassToBodyInCasePasswordTabIsChecked()
     : addBackgroundClassToBodyInCasePassPhraseTabIsChecked();
   showPasswordLength.style.left = `${passwordLength.value - 1}%`;
