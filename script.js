@@ -263,14 +263,17 @@ passPhraseLowercase.addEventListener('change', () => {
     .map(word => word.toLowerCase())
     .join(' - ');
 });
+
 passPhraseUppercase.addEventListener('change', () => {
   output.textContent = casedPassPhrase
     .map(word => word.toUpperCase())
     .join(' - ');
 });
+
 passPhraseCapitalize.addEventListener('change', () => {
   output.textContent = capitalizeWords(casedPassPhrase).join(' - ');
 });
+
 passPhraseMixedCase.addEventListener('change', () => {
   output.textContent = setWordsInMixedCase(casedPassPhrase).join(' - ');
 });
