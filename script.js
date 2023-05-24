@@ -28,6 +28,8 @@ const passPhraseUppercase = document.getElementById('passphrase-uppercase');
 const passPhraseCapitalize = document.getElementById('passphrase-capitalize');
 const passPhraseMixedCase = document.getElementById('passphrase-mixed-case');
 
+const LIMIT_OF_GENERATED_WORDS = 1000;
+
 const getRandomCharactersFromCharCode = (start, end) => {
   let Characters = '';
   for (i = start; i <= end; i++) {
@@ -40,7 +42,9 @@ let wordsList = [];
 let passPhraseCase = [];
 let casedPassPhrase = [];
 
-fetch('https://random-word-api.herokuapp.com/word?number=1000')
+fetch(
+  `https://random-word-api.herokuapp.com/word?number=${LIMIT_OF_GENERATED_WORDS}`
+)
   .then(response => response.json())
   .then(wordsData => {
     for (word in wordsData) {
@@ -118,37 +122,37 @@ const getPassPhraseCase = () => {
 };
 
 const addBackgroundClassToBodyInCasePasswordTabIsChecked = () => {
-  return `flex min-h-screen ${
+  return `flex min-h-screen bg-[${
     passwordLength.value >= 1 && passwordLength.value <= 3
-      ? 'bg-[#d1364e]'
+      ? '#d1364e'
       : passwordLength.value >= 4 && passwordLength.value <= 7
-      ? 'bg-[#ff3f46]'
+      ? '#ff3f46'
       : passwordLength.value >= 8 && passwordLength.value <= 11
-      ? 'bg-[#fe6f35]'
+      ? '#fe6f35'
       : passwordLength.value >= 12 && passwordLength.value <= 15
-      ? 'bg-[#fcae1e]'
+      ? '#fcae1e'
       : passwordLength.value >= 16 && passwordLength.value <= 19
-      ? 'bg-[#9dce5b]'
+      ? '#9dce5b'
       : passwordLength.value >= 20 && passwordLength.value <= 63
-      ? 'bg-[#3ded97]'
-      : 'bg-[#00b4d8]'
-  }`;
+      ? '#3ded97'
+      : '#00b4d8'
+  }]`;
 };
 const addBackgroundClassToBodyInCasePassPhraseTabIsChecked = () => {
-  return `flex min-h-screen ${
+  return `flex min-h-screen bg-[${
     passwordLength.value == 1
-      ? 'bg-[#d1364e]'
+      ? '#d1364e'
       : passwordLength.value == 2
-      ? 'bg-[#ff3f46]'
+      ? '#ff3f46'
       : passwordLength.value == 3
-      ? 'bg-[#fe6f35]'
+      ? '#fe6f35'
       : passwordLength.value == 4
-      ? 'bg-[#fcae1e]'
+      ? '#fcae1e'
       : passwordLength.value == 5
-      ? 'bg-[#9dce5b]'
+      ? '#9dce5b'
       : passwordLength.value == 6
-      ? 'bg-[#3ded97]'
-      : 'bg-[#00b4d8]'
+      ? '#3ded97'
+      : '#00b4d8'
   }`;
 };
 
