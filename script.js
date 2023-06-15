@@ -153,7 +153,7 @@ const addBackgroundClassToBodyInCasePassPhraseTabIsChecked = () => {
       : passwordLength.value == 6
       ? '#3ded97'
       : '#00b4d8'
-  }`;
+  }]`;
 };
 
 const checkPasswordStrength = () => {
