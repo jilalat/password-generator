@@ -223,11 +223,11 @@ copyPassword.addEventListener('click', () => {
   toggleClass(showCopiedPopUp, showCopiedPopUpTriangle);
   setTimeout(() => {
     toggleClass(showCopiedPopUp, showCopiedPopUpTriangle);
-  }, 1310);
+  }, 1200);
 });
 
 passwordTab.addEventListener('click', () => {
-  passwordLength.value = 20;
+  passwordLength.value = 31;
   generatePassword();
   toggleTabsClasses();
 });
