@@ -133,7 +133,7 @@ const addBackgroundClassToBodyInCasePasswordTabIsChecked = () => {
       ? '#fcae1e'
       : passwordLength.value >= 16 && passwordLength.value <= 19
       ? '#9dce5b'
-      : passwordLength.value >= 20 && passwordLength.value <= 63
+      : passwordLength.value >= 31 && passwordLength.value <= 63
       ? '#3ded97'
       : '#00b4d8'
   }]`;
@@ -223,7 +223,7 @@ copyPassword.addEventListener('click', () => {
   toggleClass(showCopiedPopUp, showCopiedPopUpTriangle);
   setTimeout(() => {
     toggleClass(showCopiedPopUp, showCopiedPopUpTriangle);
-  }, 1200);
+  }, 1310);
 });
 
 passwordTab.addEventListener('click', () => {
