@@ -5,6 +5,8 @@ import {
   generateTabs,
 } from './generated-html.js';
 import {
+  animatePasswordGeneration,
+  determinePasswordStrength,
   fetchRandomWords,
   getAvailableCharacters,
   getAvailableWords,
@@ -19,6 +21,7 @@ let password = [];
 let passwordType = 'random';
 let passwordLengthValue = 31;
 
+const outputWrapper = document.querySelector('.output-wrapper');
 const output = document.querySelector('output');
 
 const regeneratePassword = document.querySelector('#regenerateBtn');
@@ -64,7 +67,8 @@ const generatePassword = (passwordType, passwordLength) => {
 updatePasswordLengthRange(passwordLengthValue);
 updateInputs(passwordType);
 generatePassword(passwordType, passwordLengthValue);
-randomSwitchsListeners(inputsList, () =>
+determinePasswordStrength(passwordType, passwordLengthValue, outputWrapper);
+randomSwitchsListeners(inputsList, copyPassword, () =>
   generatePassword(passwordType, passwordLengthValue)
 );
 
@@ -75,7 +79,8 @@ randomTab.addEventListener('click', () => {
   passwordLengthMeter.value = passwordLengthValue;
   updateInputs(passwordType);
   generatePassword(passwordType, passwordLengthValue);
-  randomSwitchsListeners(inputsList, () =>
+  determinePasswordStrength(passwordType, passwordLengthValue, outputWrapper);
+  randomSwitchsListeners(inputsList, copyPassword, () =>
     generatePassword(passwordType, passwordLengthValue)
   );
 });
@@ -87,6 +92,7 @@ memorableTab.addEventListener('click', () => {
   passwordLengthMeter.value = passwordLengthValue;
   updateInputs(passwordType);
   generatePassword(passwordType, passwordLengthValue);
+  determinePasswordStrength(passwordType, passwordLengthValue, outputWrapper);
   memorableSwitchsListeners(inputsList, password, output);
 });
 
@@ -96,7 +102,12 @@ const passwordLengthInput = document.querySelector('#passwordLengthInput');
 passwordLengthMeter.addEventListener('input', e => {
   passwordLengthValue = +e.target.value;
   generatePassword(passwordType, e.target.value);
+  determinePasswordStrength(passwordType, passwordLengthValue, outputWrapper);
   passwordLengthInput.value = e.target.value;
+});
+
+passwordLengthInput.addEventListener('focus', e => {
+  e.target.select();
 });
 
 passwordLengthInput.addEventListener('input', e => {
@@ -104,6 +115,7 @@ passwordLengthInput.addEventListener('input', e => {
   e.target.value = passwordLengthValue = value;
   passwordLengthValue = value;
   generatePassword(passwordType, value);
+  determinePasswordStrength(passwordType, passwordLengthValue, outputWrapper);
   passwordLengthMeter.value = value;
 });
 
@@ -115,6 +127,7 @@ decrementPasswordLength.addEventListener('click', () => {
     passwordLengthInput.value = passwordLengthValue;
     passwordLengthMeter.value = passwordLengthValue;
     generatePassword(passwordType, passwordLengthValue);
+    determinePasswordStrength(passwordType, passwordLengthValue, outputWrapper);
   }
 });
 
@@ -126,19 +139,14 @@ incrementPasswordLength.addEventListener('click', () => {
     passwordLengthInput.value = passwordLengthValue;
     passwordLengthMeter.value = passwordLengthValue;
     generatePassword(passwordType, passwordLengthValue);
+    determinePasswordStrength(passwordType, passwordLengthValue, outputWrapper);
   }
 });
 
 regeneratePassword.addEventListener('click', () => {
-  let generationCount = 0;
-  copyPassword.disabled = true;
-  const passwordGenerationInterval = setInterval(() => {
-    generatePassword(passwordType, passwordLengthValue);
-    if (++generationCount >= 5) {
-      clearInterval(passwordGenerationInterval);
-      copyPassword.disabled = false;
-    }
-  }, 50);
+  animatePasswordGeneration(copyPassword, () =>
+    generatePassword(passwordType, passwordLengthValue)
+  );
 });
 
 copyPassword.addEventListener('click', () => {

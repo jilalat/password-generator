@@ -1,4 +1,4 @@
-export const getRandomCharactersFromCharCode = (start, end) => {
+const getRandomCharactersFromCharCode = (start, end) => {
   let Characters = '';
   for (let i = start; i <= end; i++) {
     Characters += String.fromCharCode(i);
@@ -78,7 +78,56 @@ export const getAvailableWords = (inputsList, generatedWords) => {
   return availableWords;
 };
 
-export const randomSwitchsListeners = (inputsList, generatePassword) => {
+export const animatePasswordGeneration = (copyPassword, generatePassword) => {
+  let generationCount = 0;
+  copyPassword.disabled = true;
+  const passwordGenerationInterval = setInterval(() => {
+    generatePassword();
+    if (++generationCount >= 5) {
+      clearInterval(passwordGenerationInterval);
+      copyPassword.disabled = false;
+    }
+  }, 50);
+};
+
+const STRENGTH_LEVELS = [
+  'very-week',
+  'week',
+  'medium',
+  'good',
+  'strong',
+  'very-strong',
+  'unbelievable',
+];
+
+const STRENGTH_RANGES = {
+  random: {
+    ranges: [3, 7, 11, 15, 19, 30],
+    getIndex: length =>
+      STRENGTH_RANGES.random.ranges.findIndex(max => length <= max),
+  },
+  memorable: {
+    getIndex: length => length - 1,
+  },
+};
+
+export const determinePasswordStrength = (
+  passwordType,
+  length,
+  outputWrapper
+) => {
+  outputWrapper.classList.remove(...STRENGTH_LEVELS);
+  const index = STRENGTH_RANGES[passwordType].getIndex(length);
+  const strength =
+    STRENGTH_LEVELS[index] || STRENGTH_LEVELS[STRENGTH_LEVELS.length - 1];
+  outputWrapper.classList.add(strength);
+};
+
+export const randomSwitchsListeners = (
+  inputsList,
+  copyPassword,
+  generatePassword
+) => {
   ['lowercase', 'uppercase', 'numbers', 'symbols'].forEach(content => {
     const switchElement = document.querySelector(`#${content}RandomSwitch`);
     switchElement.addEventListener('change', e => {
@@ -100,7 +149,7 @@ export const randomSwitchsListeners = (inputsList, generatePassword) => {
           if (lowercaseSwitch) lowercaseSwitch.checked = true;
         }
       }
-      generatePassword();
+      animatePasswordGeneration(copyPassword, generatePassword);
     });
   });
 };
@@ -109,18 +158,15 @@ export const memorableSwitchsListeners = (inputsList, password, output) => {
   ['lowercase', 'uppercase', 'capitalize', 'mixed'].forEach(content => {
     const switchElement = document.querySelector(`#${content}MemorableSwitch`);
     if (!switchElement) return;
-
     switchElement.addEventListener('change', e => {
       if (e.target.checked) {
         inputsList.memorable.forEach(
           option =>
             (option.isChecked = option.content.toLowerCase() === content)
         );
-        const transformedPassword = password.map(word =>
-          transformWord(word, content)
-        );
-
-        output.textContent = transformedPassword.join(' - ');
+        output.textContent = password
+          .map(word => transformWord(word, content))
+          .join(' - ');
       }
     });
   });

@@ -7,146 +7,103 @@
   --very-strong-color: #3ded97;
   --unbelievable-color: #00b4d8;
   --tab-background: rgba(255, 255, 255, 0.9);
-  --container-padding: 24px;
+  --container-padding: 16px;
 }
 
 * {
   padding: 0;
   margin: 0;
   box-sizing: border-box;
-  -webkit-tap-highlight-color: transparent;
-  -webkit-focus-ring-color: transparent;
-  outline: none;
+}
+
+html {
+  display: flex;
+  min-height: 100vh;
 }
 
 body {
-  padding: clamp(92px, 1vw, 96px) 24px;
-  min-height: 100vh;
+  padding: clamp(48px, 1vw, 32px) var(--container-padding);
   color: rgba(0, 0, 0, 0.85);
+  max-width: calc(640px + var(--container-padding));
+  margin: auto;
 }
 
-body.very-week {
-  background-color: var(--very-week-color);
-}
-body.week {
-  background-color: var(--week-color);
-}
-body.medium {
-  background-color: var(--medium-color);
-}
-body.good {
-  background-color: var(--good-color);
-}
-body.strong {
-  background-color: var(--strong-color);
-}
-body.very-strong {
-  background-color: var(--very-strong-color);
-}
-body.unbelievable {
-  background-color: var(--unbelievable-color);
-}
-
-.container {
-  max-width: calc(768px + var(--container-padding));
-  padding: 0 var(--container-padding);
-  margin: 0 auto;
-}
-
-/* .flex {
+header {
   display: flex;
-  justify-content: center;
+  gap: 16px;
   align-items: center;
-} */
+  justify-content: center;
+}
+
+header img {
+  width: 112px;
+}
 
 h1 {
-  text-align: center;
-  font-weight: bold;
-  font-size: clamp(1.875rem, 7vw, 4.5rem);
+  font-size: clamp(16px, 7vw, 32px);
   font-family: 'Ubuntu', sans-serif;
-  border: 1px solid #000;
 }
 
-.output {
-  margin-left: auto;
-  margin-right: auto;
+.output-wrapper {
+  margin: 48px auto;
   background-color: white;
-  /* max-width: clamp(20rem, 50vw, 192rem); */
-  padding-top: 0.75rem;
-  padding-bottom: 0.75rem;
-  padding-left: 0.75rem;
-  padding-right: 6rem;
-  position: relative;
+  padding: 16px;
   border-radius: 0.5rem;
   box-shadow: 0 4px 6px rgba(15, 23, 42, 0.9);
+  display: flex;
+  gap: 16px;
 }
 
-.password-output {
-  border-radius: 2px;
-  position: relative;
-  padding: clamp(12px, 1vw, 20px) clamp(92px, 1vw, 96px) clamp(12px, 1vw, 20px)
-    clamp(14px, 2vw, 32px);
-  background-color: #fff;
-  box-shadow: rgb(0, 0, 0) -1px 4px 10px -1px;
-  margin: 0 auto;
+.output-wrapper.very-week {
+  border: 3px solid var(--very-week-color);
+  background-color: rgb(from var(--very-week-color) r g b / 0.1);
 }
 
-#output {
+.output-wrapper.week {
+  border: 3px solid var(--week-color);
+  background-color: rgb(from var(--week-color) r g b / 0.1);
+}
+
+.output-wrapper.medium {
+  border: 3px solid var(--medium-color);
+  background-color: rgb(from var(--medium-color) r g b / 0.1);
+}
+
+.output-wrapper.good {
+  border: 3px solid var(--good-color);
+  background-color: rgb(from var(--good-color) r g b / 0.1);
+}
+
+.output-wrapper.strong {
+  border: 3px solid var(--strong-color);
+  background-color: rgb(from var(--strong-color) r g b / 0.1);
+}
+
+.output-wrapper.very-strong {
+  border: 3px solid var(--very-strong-color);
+  background-color: rgb(from var(--very-strong-color) r g b / 0.1);
+}
+
+.output-wrapper.unbelievable {
+  border: 3px solid var(--unbelievable-color);
+  background-color: rgb(from var(--unbelievable-color) r g b / 0.1);
+}
+
+output {
   width: 100%;
   display: flex;
   align-items: center;
   line-break: normal;
   word-break: break-all;
   font-size: clamp(12px, 2vw, 20px);
-  letter-spacing: clamp(1px, 1vw, 3px);
-  -webkit-user-select: none; /* Safari */
-  -ms-user-select: none; /* IE 10 and IE 11 */
-  user-select: none; /* Standard syntax */
 }
 
-.buttons-wrapper {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  right: 20px;
+menu {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
-  width: 60px;
+  gap: 16px;
 }
 
-.show-copied-pop-up::after,
-.show-copied-pop-up::before {
-  position: absolute;
-  background-color: rgb(255, 255, 255);
-}
-
-.show-copied-pop-up::before {
-  content: 'Copied';
-  width: fit-content;
-  padding: 5px 10px;
-  bottom: calc(100% + 13px);
-  right: 0;
-  transform: translateX(20px);
-  font-family: 'Ubuntu', sans-serif;
-  font-weight: 500;
-  text-align: center;
-  border-radius: 8px;
-  border: 1px solid #000000;
-}
-
-.show-copied-pop-up::after {
-  content: '';
-  width: 10px;
-  height: 10px;
-  bottom: calc(100% + 4px);
-  right: 6px;
-  transform: rotate(45deg) translateX(-50%);
-  border-right: 1px solid #000000;
-  border-bottom: 1px solid #000000;
-}
-
-.password-icon {
+menu button {
   width: 24px;
   height: 24px;
   border: none;
@@ -154,12 +111,7 @@ h1 {
   background-color: transparent;
   transition: all 0.2s ease-in-out;
   background-size: contain;
-  opacity: 0.3;
-}
-
-.password-icon:hover {
-  transform: scale(1.05);
-  opacity: 1;
+  opacity: 0.5;
 }
 
 .regenerate-password {
@@ -170,66 +122,140 @@ h1 {
   background-image: url('./images/copy.png');
 }
 
-.customize-password {
-  margin-top: clamp(40px, 4vw, 64px);
-  font-family: 'Sarabun', sans-serif;
-  min-width: 299px;
+.input-wrapper {
+  display: flex;
+  margin: 48px auto;
+  width: fit-content;
 }
 
-.tab {
-  display: none;
+@media (max-width: 460px) {
+  .input-wrapper {
+    flex-direction: column;
+  }
 }
 
-.tab + label {
+#tabs {
   font-size: clamp(16px, 1.5vw, 20px);
   font-family: 'Ubuntu', sans-serif;
   font-weight: 400;
-  opacity: 0.6;
-  display: inline-block;
-  padding: 12px 20px;
+  border: none;
+  display: flex;
+  flex-direction: column;
+}
+
+#tabs input {
+  display: none;
+}
+
+#tabs label {
   cursor: pointer;
+  padding: 0 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 50%;
+  text-align: center;
 }
 
-.tab:checked + label {
-  background-color: var(--tab-background);
-  border-bottom: 0;
-  opacity: 1;
-  border-radius: clamp(12px, 1vw, 16px) clamp(12px, 1vw, 16px) 0 0;
+@media (max-width: 460px) {
+  #tabs {
+    flex-direction: row;
+  }
+  #tabs label {
+    padding: 16px 12px;
+    height: fit-content;
+    flex: 1;
+  }
 }
 
-.tab-content {
-  padding: clamp(80px, 8vw, 96px) clamp(14px, 2vw, 32px) clamp(36px, 5vw, 72px);
-  background-color: var(--tab-background);
-  border-radius: 0 0 clamp(12px, 1vw, 16px) clamp(12px, 1vw, 16px);
+#tabs input:checked + label {
+  background: lightgray;
 }
 
-#password-tab:checked ~ .tab-content .passphrase-tab-content {
-  display: none;
+.inputs-wrapper {
+  background-color: lightgray;
+  padding: 12px;
 }
 
-#passphrase-tab:checked ~ .tab-content .password-tab-content {
-  display: none;
-}
-
-.tab-pass-content {
+#passwordLengthRangeWrapper {
   width: fit-content;
-  margin: 0 auto;
-  column-gap: 26px;
-  row-gap: 12px;
-  flex-wrap: wrap;
+  margin: 0 auto 16px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
 }
 
-.tab-pass-content input {
+#passwordLengthRange {
+  border: 0;
+  margin: 0 auto;
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+#passwordLengthInput {
+  font-family: 'Ubuntu', sans-serif;
+  font-weight: 500;
+  cursor: pointer;
+  border: none;
+}
+
+input[type='number']::-webkit-inner-spin-button,
+input[type='number']::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type='number'] {
+  -moz-appearance: textfield;
+  padding-right: 0;
+  text-align: center;
+}
+
+input[type='number']:focus {
+  outline: none;
+}
+
+#passwordLengthBtnsWrapper {
+  align-items: center;
+}
+
+#incrementPasswordLength,
+#decrementPasswordLength {
+  display: block;
+  width: 16px;
+  height: 16px;
+  background: #fff;
+  cursor: pointer;
+  box-shadow: rgb(184, 185, 184) 1px 1px 3px 0px;
+  border: 1px solid #0000005b;
+}
+
+#inputs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0 2px;
+  background: rgba(0, 0, 0, 0.25);
+}
+
+#inputs label {
+  padding: 4px 2px;
+  display: block;
+  flex: 1 1 calc(50% - 2px);
+  background: lightgray;
+}
+
+inputs label input {
   display: none;
 }
 
-.checkbox + label {
+inputs + label {
   cursor: pointer;
   position: relative;
   padding-left: 26px;
 }
 
-.checkbox + label::after {
+inputs + label::after {
   content: '';
   width: 16px;
   height: 16px;
@@ -247,69 +273,4 @@ h1 {
   background-size: 60%;
   background-position: center;
   background-repeat: no-repeat;
-}
-
-.password-length-wrapper {
-  position: relative;
-  width: fit-content;
-  margin: 0 auto 32px;
-}
-
-.decrement-length,
-.increment-length {
-  width: 32px;
-  height: 32px;
-  background: #fff;
-  cursor: pointer;
-  border-radius: 8px;
-  box-shadow: rgb(184, 185, 184) 1px 1px 3px 0px;
-  border: 1px solid #0000005b;
-  position: absolute;
-}
-
-.decrement-length {
-  left: -40px;
-}
-
-.increment-length {
-  right: -40px;
-}
-
-.password-length {
-  width: 200px;
-}
-
-.show-password-length-wrapper {
-  position: relative;
-  bottom: 10px;
-  margin: 0 auto;
-  width: calc(100% - 20px);
-}
-
-.show-password-length {
-  position: absolute;
-  bottom: 24px;
-  transform: translateX(-50%);
-  padding: 4px 10px;
-  font-family: 'Ubuntu', sans-serif;
-  font-weight: 500;
-  text-align: center;
-  cursor: pointer;
-  border-radius: 8px;
-  background-color: rgba(255, 255, 255, var(--bg-opacity));
-  border: 1px solid #d0d1d2;
-  background: #fff;
-}
-
-.show-password-length::after {
-  position: absolute;
-  content: '';
-  width: 10px;
-  height: 10px;
-  top: calc(100% - 1px);
-  left: calc(50% - 1px);
-  background: #fff;
-  transform: rotate(45deg) translateX(-50%);
-  border-right: 1px solid #d0d1d2;
-  border-bottom: 1px solid #d0d1d2;
 }

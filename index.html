@@ -23,32 +23,39 @@
 </head>
 
 <body>
-  <header><img class="logo-img" src="./images/logo.png" alt="Password Generator logo">
+  <header>
+    <img class="logo-img" src="./images/logo.png" alt="Password Generator logo">
     <h1>Strong Passwords Generator</h1>
   </header>
 
   <main class="">
-    <div class="output">
+    <div class="output-wrapper">
       <output></output>
       <menu>
         <button id="regenerateBtn" class='regenerate-password'>
-          <img src='./images/regenerate.png' alt="">
+
         </button>
         <button id="copyBtn" class="copy-password">
-          <img src='./images/copy.png' alt="">
+
         </button>
       </menu>
     </div>
 
-    <div class="">
-      <div class="flex justify-center items-center relative w-fit mx-auto">
-        <div id="passwordLengthRange">
-        </div>
-        <button id="decrementPasswordLength">-</button>
-        <button id="incrementPasswordLength">+</button>
-      </div>
+    <div class="input-wrapper">
+
       <fieldset id="tabs"></fieldset>
-      <div id="inputs"></div>
+      <div class="inputs-wrapper">
+
+
+        <div id="passwordLengthRangeWrapper">
+          <fieldset id="passwordLengthRange"></fieldset>
+          <div id="passwordLengthBtnsWrapper">
+            <button id="incrementPasswordLength">+</button>
+            <button id="decrementPasswordLength">-</button>
+          </div>
+        </div>
+        <div id="inputs"></div>
+      </div>
       <!-- <button id="resetInputs">Reset to default settings</button> -->
       <!-- <button>Need more than one password?</button> -->
     </div>
