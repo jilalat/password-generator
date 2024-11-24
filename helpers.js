@@ -1,10 +1,7 @@
-const getRandomCharactersFromCharCode = (start, end) => {
-  let Characters = '';
-  for (let i = start; i <= end; i++) {
-    Characters += String.fromCharCode(i);
-  }
-  return Characters;
-};
+const getRandomCharactersFromCharCode = (start, end) =>
+  Array.from({ length: end - start + 1 }, (_, i) =>
+    String.fromCharCode(start + i)
+  ).join('');
 
 export const fetchRandomWords = async maxWords => {
   try {
@@ -64,16 +61,16 @@ const transformWord = (word, type) => {
 };
 
 export const getAvailableWords = (inputsList, generatedWords) => {
-  const transformationTypes = ['lowercase', 'UPPERCASE', 'Capitalize', 'MiXEd'];
-
-  const availableWords = transformationTypes.reduce((words, type) => {
-    const isChecked = inputsList.memorable.some(
-      item => item.content === type && item.isChecked
-    );
-    return isChecked
-      ? words.map(word => transformWord(word, type.toLowerCase()))
-      : words;
-  }, generatedWords);
+  const availableWords = inputsList.memorable
+    .map(item => item.content)
+    .reduce((words, type) => {
+      const isChecked = inputsList.memorable.some(
+        item => item.content === type && item.isChecked
+      );
+      return isChecked
+        ? words.map(word => transformWord(word, type.toLowerCase()))
+        : words;
+    }, generatedWords);
 
   return availableWords;
 };
@@ -90,25 +87,9 @@ export const animatePasswordGeneration = (copyPassword, generatePassword) => {
   }, 50);
 };
 
-const STRENGTH_LEVELS = [
-  'very-week',
-  'week',
-  'medium',
-  'good',
-  'strong',
-  'very-strong',
-  'unbelievable',
-];
-
-const STRENGTH_RANGES = {
-  random: {
-    ranges: [3, 7, 11, 15, 19, 30],
-    getIndex: length =>
-      STRENGTH_RANGES.random.ranges.findIndex(max => length <= max),
-  },
-  memorable: {
-    getIndex: length => length - 1,
-  },
+const getStrengthIndex = (length, ranges) => {
+  if (!ranges) return length - 1;
+  return ranges.findIndex(max => length <= max);
 };
 
 export const determinePasswordStrength = (
@@ -116,10 +97,20 @@ export const determinePasswordStrength = (
   length,
   outputWrapper
 ) => {
-  outputWrapper.classList.remove(...STRENGTH_LEVELS);
-  const index = STRENGTH_RANGES[passwordType].getIndex(length);
+  const strengthClasses = [
+    'very-week',
+    'week',
+    'medium',
+    'good',
+    'strong',
+    'very-strong',
+    'unbelievable',
+  ];
+  const ranges = passwordType === 'random' ? [3, 7, 11, 15, 19, 30] : null;
+  const index = getStrengthIndex(length, ranges);
   const strength =
-    STRENGTH_LEVELS[index] || STRENGTH_LEVELS[STRENGTH_LEVELS.length - 1];
+    strengthClasses[index] || strengthClasses[strengthClasses.length - 1];
+  outputWrapper.classList.remove(...strengthClasses);
   outputWrapper.classList.add(strength);
 };
 
@@ -128,46 +119,53 @@ export const randomSwitchsListeners = (
   copyPassword,
   generatePassword
 ) => {
-  ['lowercase', 'uppercase', 'numbers', 'symbols'].forEach(content => {
-    const switchElement = document.querySelector(`#${content}RandomSwitch`);
-    switchElement.addEventListener('change', e => {
-      const option = inputsList.random.find(
-        item => item.content.toLowerCase() === content
-      );
-      if (option) {
-        option.isChecked = e.target.checked;
-      }
-      if (!inputsList.random.some(item => item.isChecked)) {
-        const lowercaseOption = inputsList.random.find(
-          item => item.content === 'lowercase'
+  inputsList.random
+    .map(item => item.content.toLowerCase())
+    .forEach(content => {
+      const switchElement = document.querySelector(`#${content}RandomSwitch`);
+      switchElement.addEventListener('change', e => {
+        const option = inputsList.random.find(
+          item => item.content.toLowerCase() === content
         );
-        if (lowercaseOption) {
-          lowercaseOption.isChecked = true;
-          const lowercaseSwitch = document.querySelector(
-            '#lowercaseRandomSwitch'
-          );
-          if (lowercaseSwitch) lowercaseSwitch.checked = true;
+        if (option) {
+          option.isChecked = e.target.checked;
         }
-      }
-      animatePasswordGeneration(copyPassword, generatePassword);
+        if (!inputsList.random.some(item => item.isChecked)) {
+          const lowercaseOption = inputsList.random.find(
+            item => item.content === 'lowercase'
+          );
+          if (lowercaseOption) {
+            lowercaseOption.isChecked = true;
+            const lowercaseSwitch = document.querySelector(
+              '#lowercaseRandomSwitch'
+            );
+            if (lowercaseSwitch) lowercaseSwitch.checked = true;
+          }
+        }
+        animatePasswordGeneration(copyPassword, generatePassword);
+      });
     });
-  });
 };
 
-export const memorableSwitchsListeners = (inputsList, password, output) => {
-  ['lowercase', 'uppercase', 'capitalize', 'mixed'].forEach(content => {
-    const switchElement = document.querySelector(`#${content}MemorableSwitch`);
-    if (!switchElement) return;
-    switchElement.addEventListener('change', e => {
-      if (e.target.checked) {
-        inputsList.memorable.forEach(
-          option =>
-            (option.isChecked = option.content.toLowerCase() === content)
-        );
-        output.textContent = password
-          .map(word => transformWord(word, content))
-          .join(' - ');
-      }
+export const memorableSwitchsListeners = (inputsList, getPassword, output) => {
+  inputsList.memorable
+    .map(item => item.content.toLowerCase())
+    .forEach(content => {
+      const switchElement = document.querySelector(
+        `#${content}MemorableSwitch`
+      );
+      if (!switchElement) return;
+      switchElement.addEventListener('change', e => {
+        if (e.target.checked) {
+          inputsList.memorable.forEach(
+            option =>
+              (option.isChecked = option.content.toLowerCase() === content)
+          );
+          const updatedPassword = getPassword();
+          output.textContent = updatedPassword
+            .map(word => transformWord(word, content))
+            .join(' - ');
+        }
+      });
     });
-  });
 };

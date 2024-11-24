@@ -93,7 +93,8 @@ memorableTab.addEventListener('click', () => {
   updateInputs(passwordType);
   generatePassword(passwordType, passwordLengthValue);
   determinePasswordStrength(passwordType, passwordLengthValue, outputWrapper);
-  memorableSwitchsListeners(inputsList, password, output);
+  // memorableSwitchsListeners(inputsList, password, output);
+  memorableSwitchsListeners(inputsList, () => password, output);
 });
 
 const passwordLengthMeter = document.querySelector('#passwordLengthMeter');
@@ -140,6 +141,7 @@ incrementPasswordLength.addEventListener('click', () => {
     passwordLengthMeter.value = passwordLengthValue;
     generatePassword(passwordType, passwordLengthValue);
     determinePasswordStrength(passwordType, passwordLengthValue, outputWrapper);
+    // memorableSwitchsListeners(inputsList, password, output);
   }
 });
 

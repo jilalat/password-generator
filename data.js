@@ -12,3 +12,13 @@ export const inputsList = {
     { content: 'MiXeD', isChecked: false, helper: '' },
   ],
 };
+
+export const strengthClasses = [
+  'very-week',
+  'week',
+  'medium',
+  'good',
+  'strong',
+  'very-strong',
+  'unbelievable',
+];

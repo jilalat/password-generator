@@ -1,3 +1,5 @@
+// generated-html.js
+
 export const generateInputs = (inputsList, passwordType) => {
   return inputsList
     .map(
