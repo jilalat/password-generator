@@ -39,3 +39,10 @@ export const generatePasswordLengthRange = value => {
     <input type="range" id="passwordLengthMeter" value="${value}" min="1" max="64" aria-labelledby="passwordLength" /><input id="passwordLengthInput" type="number" value="${value}" min="1" max="64" />
   `;
 };
+
+export const generatePasswordCopiedPopUp = () => {
+  const popup = document.createElement('div');
+  popup.id = 'copyNotification';
+  popup.textContent = 'Password copied';
+  return popup;
+};

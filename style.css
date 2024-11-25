@@ -16,9 +16,6 @@
   box-sizing: border-box;
 }
 
-html {
-}
-
 body {
   display: flex;
   flex-direction: column;
@@ -233,10 +230,6 @@ input[type='number']:focus {
   outline: none;
 }
 
-#passwordLengthBtnsWrapper {
-  align-items: center;
-}
-
 #incrementPasswordLength,
 #decrementPasswordLength {
   display: block;
@@ -290,6 +283,24 @@ inputs + label::after {
   background-size: 60%;
   background-position: center;
   background-repeat: no-repeat;
+}
+
+#copyNotification {
+  position: fixed;
+  bottom: 100px;
+  left: 50%;
+  background-color: rgba(0, 0, 0, 0.8);
+  color: white;
+  padding: 10px 20px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-family: 'Ubuntu', sans-serif;
+  transform: translateX(-50%);
+  -webkit-transform: translateX(-50%);
+  -moz-transform: translateX(-50%);
+  -ms-transform: translateX(-50%);
+  -o-transform: translateX(-50%);
+  -webkit-transform: translateX(-50%);
 }
 
 footer {

@@ -1,6 +1,7 @@
 import { inputsList } from './data.js';
 import {
   generateInputs,
+  generatePasswordCopiedPopUp,
   generatePasswordLengthRange,
   generateTabs,
 } from './generated-html.js';
@@ -142,7 +143,6 @@ incrementPasswordLength.addEventListener('click', () => {
     passwordLengthMeter.value = passwordLengthValue;
     generatePassword(passwordType, passwordLengthValue);
     determinePasswordStrength(passwordType, passwordLengthValue, outputWrapper);
-    // memorableSwitchsListeners(inputsList, password, output);
   }
 });
 
@@ -153,5 +153,16 @@ regeneratePassword.addEventListener('click', () => {
 });
 
 copyPassword.addEventListener('click', () => {
-  navigator.clipboard.writeText(output.textContent);
+  navigator.clipboard
+    .writeText(output.textContent)
+    .then(() => {
+      const popup = generatePasswordCopiedPopUp();
+      document.body.appendChild(popup);
+      setTimeout(() => {
+        popup.remove();
+      }, 2000);
+    })
+    .catch(err => {
+      console.error('Failed to copy text: ', err);
+    });
 });
