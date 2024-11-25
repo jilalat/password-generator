@@ -124,11 +124,15 @@ menu button {
 }
 
 .regenerate-password {
-  background-image: url('./images/regenerate.png');
+  background-image: url('../images/regenerate.png');
 }
 
 .copy-password {
-  background-image: url('./images/copy.png');
+  background-image: url('../images/copy.png');
+}
+
+.copy-password.clicked {
+  background-image: url('../images/checked.png');
 }
 
 .input-wrapper {

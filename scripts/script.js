@@ -158,8 +158,10 @@ copyPassword.addEventListener('click', () => {
     .then(() => {
       const popup = generatePasswordCopiedPopUp();
       document.body.appendChild(popup);
+      copyPassword.classList.add('clicked');
       setTimeout(() => {
         popup.remove();
+        copyPassword.classList.remove('clicked');
       }, 2000);
     })
     .catch(err => {
