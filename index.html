@@ -4,68 +4,131 @@
 <head>
   <meta charset="UTF-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <meta name="description" content="Instantly generate a secure, random password or passphrase, with zero effort" />
-  <meta name="keywords" content="Password Generator" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="icon" type="image/x-icon" href="./images/logo.png" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0" />
+
+  <!-- Primary Meta Tags -->
+  <title>StrongPass | Free Online Password Generator Tool</title>
+  <meta name="description"
+    content="Generate secure passwords and memorable passphrases instantly with StrongPass. Customize password length, include special characters, numbers, and symbols. Free online tool for creating strong passwords." />
+  <meta name="keywords"
+    content="strongpass, password generator, secure password, random password generator, strong password creator, online password tool, memorable passphrase generator" />
+  <meta name="author" content="StrongPass" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://strongpass.online" />
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://strongpass.online" />
+  <meta property="og:title" content="StrongPass - Create Strong, Secure Passwords Instantly" />
+  <meta property="og:description"
+    content="Generate secure passwords and memorable passphrases instantly with StrongPass. Free online password generator with customizable security options." />
+  <meta property="og:image" content="https://strongpass.online/images/logo.png" />
+  <meta property="og:image:alt" content="StrongPass Password Generator" />
+  <meta property="og:site_name" content="StrongPass" />
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="StrongPass - Create Strong, Secure Passwords Instantly" />
+  <meta name="twitter:description"
+    content="Generate secure passwords and memorable passphrases instantly with StrongPass. Free online password generator with customizable security options." />
+  <meta name="twitter:image" content="https://strongpass.online/images/logo.png" />
+  <meta name="twitter:image:alt" content="StrongPass Password Generator" />
+
+  <!-- Favicon -->
+  <link rel="icon" href="./images/logo.png" sizes="32x32" />
+  <link rel="icon" href="./images/logo.png" sizes="192x192" />
+  <link rel="apple-touch-icon" href="./images/logo.png" />
+  <meta name="theme-color" content="#4CAF50" />
+
+  <!-- Preconnect -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+  <!-- Preload Critical Assets -->
+  <link rel="preload" href="./images/logo.png" as="image" />
+  <link rel="preload" href="./style.css" as="style" />
+  <link rel="preload" href="./scripts/script.js" as="script" />
+
+  <!-- Styles -->
   <link
     href="https://fonts.googleapis.com/css2?family=Roboto+Mono&family=Sarabun:wght@300&family=Ubuntu:wght@400;500;700&display=swap"
     rel="stylesheet" />
-
   <link rel="stylesheet" type="text/css" href="./style.css" />
-  <script type="module" src="data.js" defer></script>
-  <script type="module" src="generated-html.js" defer></script>
-  <script type="module" src="helpers.js" defer></script>
-  <script type="module" src="script.js" defer></script>
-  <title>Strong Passwords Generator</title>
+
+  <!-- Scripts -->
+  <script type="module" src="./scripts/data.js" defer></script>
+  <script type="module" src="./scripts/generated-html.js" defer></script>
+  <script type="module" src="./scripts/helpers.js" defer></script>
+  <script type="module" src="./scripts/script.js" defer></script>
+
+  <!-- JSON-LD Structured Data -->
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "StrongPass",
+      "description": "Free online tool to generate secure passwords and memorable passphrases instantly.",
+      "url": "https://strongpass.online",
+      "applicationCategory": "SecurityApplication",
+      "operatingSystem": "Any",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      },
+      "features": [
+        "Random password generation",
+        "Memorable passphrase creation",
+        "Customizable password length",
+        "Special characters option",
+        "Numbers option",
+        "Instant copy to clipboard"
+      ],
+      "browserRequirements": "Requires JavaScript",
+      "permissions": "No special permissions required",
+      "softwareVersion": "1.0"
+    }
+  </script>
 </head>
 
 <body>
   <header>
-    <img class="logo-img" src="./images/logo.png" alt="Password Generator logo">
+    <img class="logo-img" src="./images/logo.png" alt="StrongPass Logo">
     <h1>Strong Passwords Generator</h1>
   </header>
 
-  <main class="">
-    <div class="output-wrapper">
-      <output></output>
-      <menu>
-        <button id="regenerateBtn" class='regenerate-password'>
+  <main>
+    <div>
+      <div class="output-wrapper">
+        <output aria-label="Generated Password"></output>
+        <menu>
+          <button id="regenerateBtn" class='regenerate-password'></button>
+          <button id="copyBtn" class="copy-password"></button>
+        </menu>
+      </div>
 
-        </button>
-        <button id="copyBtn" class="copy-password">
-
-        </button>
-      </menu>
-    </div>
-
-    <div class="input-wrapper">
-
-      <fieldset id="tabs"></fieldset>
-      <div class="inputs-wrapper">
-
-
-        <div id="passwordLengthRangeWrapper">
-          <fieldset id="passwordLengthRange"></fieldset>
-          <div id="passwordLengthBtnsWrapper">
-            <button id="incrementPasswordLength">+</button>
-            <button id="decrementPasswordLength">-</button>
+      <div class="input-wrapper">
+        <fieldset id="tabs" aria-label="Settings Tabs"></fieldset>
+        <div class="inputs-wrapper">
+          <div id="passwordLengthRangeWrapper">
+            <button id="incrementPasswordLength" aria-label="Increase Password Length">+</button>
+            <fieldset id="passwordLengthRange" aria-label="Password Length"></fieldset>
+            <div id="passwordLengthBtnsWrapper">
+              <button id="decrementPasswordLength" aria-label="Decrease Password Length">-</button>
+            </div>
           </div>
+          <div id="inputs" aria-label="Password Options"></div>
         </div>
-        <div id="inputs"></div>
-      </div>
-      <!-- <button id="resetInputs">Reset to default settings</button> -->
-      <!-- <button>Need more than one password?</button> -->
-    </div>
-    <div
-      class="font-['Sarabun'] mt-10 md:mt-12 lg:mt-14 xl:mt-16 mx-auto max-w-xl md:max-w-2xl lg:max-w-3xl xl:max-w-4xl 2xl:max-w-5xl">
-      <div
-        class="bg-white/[.9] px-4 md:px-5 lg:px-6 xl:px-7 2xl:px-8 pt-20 lg:pt-[88px] xl:pt-24 pb-10 md:pb-12 lg:pb-14 xl:pb-16 2xl:pb-18">
       </div>
     </div>
-    </m>
+  </main>
+
+  <footer class="site-footer">
+    <p>©
+      <script>document.write(new Date().getFullYear())</script> <a href="https://strongpass.online">StrongPass</a>.
+      Free online password generator.
+    </p>
+  </footer>
 </body>
 
 </html>

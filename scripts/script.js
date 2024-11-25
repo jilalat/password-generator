@@ -73,6 +73,7 @@ randomSwitchsListeners(inputsList, copyPassword, () =>
 );
 
 randomTab.addEventListener('click', () => {
+  if (passwordType === 'random') return;
   passwordType = 'random';
   passwordLengthValue = 31;
   passwordLengthInput.value = passwordLengthValue;
@@ -86,14 +87,14 @@ randomTab.addEventListener('click', () => {
 });
 
 memorableTab.addEventListener('click', () => {
+  if (passwordType === 'memorable') return;
   passwordType = 'memorable';
-  passwordLengthValue = 6;
+  passwordLengthValue = 7;
   passwordLengthInput.value = passwordLengthValue;
   passwordLengthMeter.value = passwordLengthValue;
   updateInputs(passwordType);
   generatePassword(passwordType, passwordLengthValue);
   determinePasswordStrength(passwordType, passwordLengthValue, outputWrapper);
-  // memorableSwitchsListeners(inputsList, password, output);
   memorableSwitchsListeners(inputsList, () => password, output);
 });
 
