@@ -49,7 +49,7 @@ main > div {
 }
 
 h1 {
-  font-size: clamp(16px, 7vw, 32px);
+  font-size: 32px;
   font-family: 'Ubuntu', sans-serif;
 }
 
@@ -60,12 +60,7 @@ h1 {
   box-shadow: 0 4px 6px rgba(15, 23, 42, 0.9);
   display: flex;
   gap: 16px;
-  /* min-width: 100%; */
   align-items: center;
-  -webkit-border-radius: 0.5rem;
-  -moz-border-radius: 0.5rem;
-  -ms-border-radius: 0.5rem;
-  -o-border-radius: 0.5rem;
 }
 
 .output-wrapper.very-week {
@@ -109,7 +104,7 @@ output {
   align-items: center;
   line-break: normal;
   word-break: break-all;
-  font-size: clamp(12px, 2vw, 20px);
+  font-size: 20px;
 }
 
 menu {
@@ -149,7 +144,7 @@ menu button {
 }
 
 #tabs {
-  font-size: clamp(16px, 1.5vw, 20px);
+  font-size: 20px;
   font-family: 'Ubuntu', sans-serif;
   font-weight: 400;
   border: none;
@@ -296,18 +291,13 @@ inputs + label::after {
   font-size: 14px;
   font-family: 'Ubuntu', sans-serif;
   transform: translateX(-50%);
-  -webkit-transform: translateX(-50%);
-  -moz-transform: translateX(-50%);
-  -ms-transform: translateX(-50%);
-  -o-transform: translateX(-50%);
-  -webkit-transform: translateX(-50%);
 }
 
 footer {
   padding: 16px var(--container-padding);
   border-top: 1px solid rgba(0, 0, 0, 0.1);
   text-align: center;
-  font-size: clamp(12px, 1.2vw, 16px);
+  font-size: 16px;
   font-family: 'Ubuntu', sans-serif;
 }
 
